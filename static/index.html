@@ -9,12 +9,12 @@
 <form method=POST action="/kmeans">
     <div>
         <label>Enter column Name 1:</label>
-        <input type="text"  name="attribute1" placeholder="Enter attribute 1">
+        <input type="text"  name="data1" placeholder="Enter attribute 1">
         <br><br>
     </div>
     <div>
         <label>Enter column Name 2:</label>
-        <input type="text" name="attribute2" placeholder="Enter attribute 2">
+        <input type="text" name="data2" placeholder="Enter attribute 2">
         <br><br>
     </div>
     <div>
@@ -23,15 +23,15 @@
     </div>
     <button type="submit">kmeans</button>
     <br><br><br>
-    {%for i in disCluster %}
-        {{i.dist}}<br>
+    {%for row in distanceCluster %}
+        {{row.dist}}<br>
     {% endfor %}
     <br>
 
     <br>
-    <!--{%for i in pdict%}-->
-       <!--No of points in cluster:{{i}}<br>-->
-    <!--{% endfor %}-->
+    {%for row in points%}
+       No of points in cluster:{{row}}<br>
+    {% endfor %}
     <br>
     <br>
     </form>
@@ -44,7 +44,7 @@
        <form action="{{url_for('GreatMag')}}" method="POST" enctype="multipart/form-data">
          <input type="text" value="" name="GreatMag" placeholder="Enter Magnitude">
          <input type="submit" value="GreaterValue">
-      </form>
+
 		 <p> Number of earthquakes that has greater magnitude are {{counter}} </p>
        <table border = 1>
          <thead>
@@ -58,6 +58,7 @@
 		 </tr>
 		   {% endfor %}
          </table>
+           </form>
 ================================================================================================================================================
     <p>Enter range of magnitudes with start and end dates</p>
 		<form action="{{url_for('BetMag')}}" method="POST" enctype="multipart/form-data">
@@ -66,7 +67,7 @@
 			<input type="text" value="" name="StartDate" placeholder="YYYY-MM-DDDD">
 			<input type="text" value="" name="EndDate" placeholder="YYYY-MM-DDDD">
          <input type="submit" value="Range">
-      </form>
+
 		<table border = 1>
          <thead>
 
@@ -81,15 +82,16 @@
 		   {% endfor %}
          </table><br>
 		 <br>
+            </form>
 ===========================================================================================================================
     <br>
 		<p>Search for earthquakes occured with a magnitude and find if they occurred mostly by Day or night</p>
        <form action="{{url_for('DayMag')}}" method="POST" enctype="multipart/form-data">
          <input type="text" value="" name="DayMag" placeholder="Enter Magnitude">
          <input type="submit" value="TimeOfOccurence">
-      </form><br>
+      <br>
 		<br>
-		 <p>  {{msg}} </p>
+		 <p>  {{msg}} </p></form>
 ====================================================================================================================================
   <p>Search for earthquakes nearest to a specified location</p>
        <form action="{{url_for('radius')}}" method="POST" enctype="multipart/form-data">
@@ -97,14 +99,15 @@
           <input type="text" value="" name="LongCoord" placeholder="Enter Longitude">
            <input type="text" value="" name="Dist" placeholder="Enter Distance">
          <input type="submit" value="Calculate">
-      </form>
+
 		 <p> Number of earthquakes nearest to the specified location {{count}}</p>
+           </form>
 =========================================================================================================================================
      <p>Search for earthquakes occured with a magnitude greater than the entered magnitude for the past 4 days</p>
        <form action="{{url_for('PrevDays')}}" method="POST" enctype="multipart/form-data">
          <input type="text" value="" name="PrevDays" placeholder="Enter Magnitude">
          <input type="submit" value="Prev 4 Days">
-      </form>
+
 		 <p> Number of earthquakes that has greater magnitude and occured in the past 4 days</p>
        <table border = 1>
          <thead>
@@ -118,7 +121,7 @@
 		 </tr>
 		   {% endfor %}
          </table>
-
+        </form>
 ========================================================================================================================================
 
 </body>

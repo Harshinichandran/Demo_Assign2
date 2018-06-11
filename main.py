@@ -140,7 +140,7 @@ def GreatMag():
     con = sqll.connect("Assign2.db")
     con.row_factory = sqll.Row
     cur = con.cursor()
-    cur.execute('SELECT mag FROM EarthQuake1 where mag > ?', (GreatMag,))
+    cur.execute('SELECT mag FROM EarthQuake1 where mag > ? LIMIT 10', (GreatMag,))
     # cur.execute('SELECT * FROM EarthQuake')
 
     rows = cur.fetchall()
@@ -148,7 +148,7 @@ def GreatMag():
     for row in rows:
         count = count + 1
         # magnitude.append("mag:" + row[0])
-    # return vehicleName
+
     return render_template('index.html', counter=count, rows=rows)
 #########################################################################################################################
 
@@ -176,10 +176,10 @@ def DayMag():
     cur1 = con.cursor()
     cur2= con.cursor()
     cur1.execute('SELECT mag FROM EarthQuake1 where mag > ? and time between time(?)and time(?)',
-                (DayMag, '23:00:00', '23:59:59'))
+                (DayMag, '05:00:00', '17:00:00'))
     rows1 = cur1.fetchall()
     cur2.execute('SELECT mag FROM EarthQuake1 where mag > ? and time between time(?)and time(?)',
-                [DayMag, '00:00:00', '00:59:59'])
+                [DayMag, '17:01:01', '04:59:59'])
     rows2 = cur2.fetchall()
     count1 = 0
     count2 = 0
@@ -191,7 +191,7 @@ def DayMag():
 
 
     if count1 > count2:
-        msg = str(count1)+"Earthquake occurs mostly at night"
+        msg = str(count1)+" Earthquake occurs mostly at night"
         # msg= "count1"+str(count1)
     else:
         msg = str(count2)+" Earthquakes occurs mostly during day"
